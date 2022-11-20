@@ -12,5 +12,7 @@ namespace APITeste.Data
 
         public DbSet<Cliente> Cliente { get; set; }
 
+        public DbSet<APITeste.Models.ItemPedido> ItemPedido { get; set; }
+
     }
 }
