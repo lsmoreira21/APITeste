@@ -1,0 +1,16 @@
+﻿using APITeste.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace APITeste.Data    
+{
+    public class APIDbContext: DbContext 
+    {
+        public APIDbContext (DbContextOptions<APIDbContext>options) : base(options)
+        {
+
+        }
+
+        public DbSet<Cliente> Cliente { get; set; }
+
+    }
+}

@@ -1,6 +1,16 @@
+using APITeste.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMySql");
+builder.Services.AddDbContext<APIDbContext>(X => X.UseMySql(
+            connectionStringMysql,
+            Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.17 (MySql Community Server - GPL)")
+            )
+);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
