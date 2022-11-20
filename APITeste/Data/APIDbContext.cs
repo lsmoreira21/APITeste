@@ -14,5 +14,7 @@ namespace APITeste.Data
 
         public DbSet<APITeste.Models.ItemPedido> ItemPedido { get; set; }
 
+        public DbSet<APITeste.Models.Pedido> Pedido { get; set; }
+
     }
 }

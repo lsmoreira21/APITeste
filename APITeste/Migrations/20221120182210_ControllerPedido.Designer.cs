@@ -3,6 +3,7 @@ using System;
 using APITeste.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APITeste.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    partial class APIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120182210_ControllerPedido")]
+    partial class ControllerPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,9 +69,6 @@ namespace APITeste.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataPedido")
                         .HasColumnType("datetime(6)");
 
@@ -77,8 +76,6 @@ namespace APITeste.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ClienteID");
 
                     b.ToTable("Pedido");
                 });
@@ -88,18 +85,6 @@ namespace APITeste.Migrations
                     b.HasOne("APITeste.Models.Pedido", null)
                         .WithMany("Items")
                         .HasForeignKey("PedidoID");
-                });
-
-            modelBuilder.Entity("APITeste.Models.Pedido", b =>
-                {
-                    b.HasOne("APITeste.Models.Cliente", null)
-                        .WithMany("Pedidos")
-                        .HasForeignKey("ClienteID");
-                });
-
-            modelBuilder.Entity("APITeste.Models.Cliente", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("APITeste.Models.Pedido", b =>
