@@ -3,6 +3,7 @@ using System;
 using APITeste.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APITeste.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    partial class APIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221121191225_CamposCalculados")]
+    partial class CamposCalculados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +61,8 @@ namespace APITeste.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PedidoID");
+
                     b.ToTable("ItemPedido");
                 });
 
@@ -80,6 +84,20 @@ namespace APITeste.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Pedido");
+                });
+
+            modelBuilder.Entity("APITeste.Models.ItemPedido", b =>
+                {
+                    b.HasOne("APITeste.Models.Pedido", null)
+                        .WithMany("Itens")
+                        .HasForeignKey("PedidoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("APITeste.Models.Pedido", b =>
+                {
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }

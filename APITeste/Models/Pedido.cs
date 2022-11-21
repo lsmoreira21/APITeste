@@ -9,7 +9,8 @@ namespace APITeste.Models
         public int ID { get; set; }
         public int NumeroPedido { get; set; }
         public DateTime DataPedido { get; set; }
+
         [ForeignKey("Cliente")]
-        public int CLienteID { get; set; }        
+        public int CLienteID { get; set; }
     }
 }
